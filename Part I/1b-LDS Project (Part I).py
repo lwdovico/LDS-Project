@@ -768,7 +768,7 @@ class Upload_Table():
                       'float': float, 
                       'str': str, 
                       'datetime.date': lambda x: datetime.strptime(x, '%Y-%m-%d').date(), 
-                      'bool': bool}
+                      'bool': lambda x: bool(int(float(x)))}
         
         
         col_type = dict()
