@@ -1,6 +1,12 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+## Setting up the starting time of execution
+# In order to measure the total time of execution
+
+from datetime import datetime
+start_time = datetime.now() # just to measure total execution time
+
 ## PREPROCESSING FUNCTIONS
 # As external library we used only ***re*** to split according to a regular expression pattern and ***pycountry_convert*** to fetch the countries and continents
 
@@ -475,7 +481,7 @@ for row in new_formatted_subject_col:
         description, parent, level = subject_caller[col_val]
         
         #adding the description of the each value to the row
-        new_row = f'{description} ({col_val})'
+        new_row = f'{description}({col_val})'
         
         #ppend the row to the description row
         description_row.append(new_row)
@@ -690,21 +696,22 @@ create_csv('Answers.csv', answer_final)
 ## LOADING ON THE SERVER
 # To manage the data we used mainly functions written in the previous step and a Class we wrote to upload to the actual server
 
-from datetime import datetime
 from tqdm import tqdm
 import pyodbc
 import copy
 import os
 
-#listing the csv files in the same folder that do not have data in the name
-csv_files = [x for x in os.listdir() if x[-4:] == '.csv' and 'data' not in x]
-print(csv_files)
+# This is in the case the upload is intended to be done with variables created during the preprocessing
 
-#add the files to a dictionary to have them ready to be uploaded by calling just the file name
 tables = dict()
-for file_name in csv_files:
-    tables[file_name] = preprocess_csv_to_dict(file_name)
+table_names = ['Geography', 'Subject', 'Organization', 'Date', 'User', 'Answers']
 
+# creating a copy of each to run this cell multiple times
+tables_saved = [geography_table[:], subject_table[:], organization_table[:], date_table[:], user_table[:], answer_final[:]]
+
+for table_name, table in zip(table_names, tables_saved):
+    header = table.pop(0) # getting the header from each table
+    tables[table_name] = dict_from_header(header, table) #storing each table to a dictionary called tables ()
 
 ## Upload tables on the Data Warehouse
 # 
@@ -766,9 +773,9 @@ class Upload_Table():
         #the lambda functions is there to cast the correct types
         cast_types = {'int': lambda x: int(float(x)), #some strings have values with a dot
                       'float': float, 
-                      'str': str, 
-                      'datetime.date': lambda x: datetime.strptime(x, '%Y-%m-%d').date(), 
-                      'bool': lambda x: bool(int(float(x)))}
+                      'str': lambda x: f"'{str(x)}'", #string
+                      'datetime.date': lambda x: f"'{str(x)}'",  #date must be passed as a string in explicit queries
+                      'bool': lambda x: int(float(x))}
         
         
         col_type = dict()
@@ -800,11 +807,13 @@ class Upload_Table():
 
     def sql_query_maker(self):
         #add the first part of the query with table name and the rest
-        sql_query = f"INSERT INTO {self.table_name} ({', '.join(self.header_table)}) VALUES (?"
+        sql_query = f"INSERT INTO {self.table_name} ({', '.join(self.header_table)}) VALUES ("
+        first_parameter = '{}'
+        sql_query += first_parameter
         
         #for each element in the header add the parametric question mark (except for the first, thus -1)
         for i in range(len(self.header_table)-1):
-            sql_query += ",?"
+            sql_query += ", {}"
         sql_query += ")" #close the row to upload
 
         return sql_query
@@ -831,41 +840,52 @@ class Upload_Table():
             
     def insert_into_table(self):
         #getting the query
-        sql_query = self.sql_query_maker()
+        model_sql_query = self.sql_query_maker()
         #removing all the values from table to upload it
         self.delete_previous_vals_from_table(self.table_name)
         
-        print("Query:\n" + sql_query)
+        print("Query:\n" + model_sql_query.format(*'?'*len(self.header_table)))
+        
+        sql_query = ''
 
         #tqdm gives the progress bar, I looped across the rows (avoiding the header)
         for n, row in enumerate(tqdm(self.table[1:], ascii=True, desc='Uploading Progress')):
             tupla = tuple(el for el in row) #making the row a tuple if it is not
             
-            # Try to reconnect at least 10 times if the execution fails
-            for attempt in range(10):
-                try:
-                    #executing the query with the values in the tuple
-                    self.cursor.execute(sql_query, (tupla))
-                    break
-                    
-                #if it reaches the 10th execution raise the error I blocked
-                except Exception as e:
-                    if attempt == 9:
-                        raise e
-                    else:
-                        continue
-            
-            #to commit every 1000 records (in case it crashes and I avoid the delete statement to finish uploading later)
-            if n == (n // 1000) * 1000:
-                self.conn.commit()
+            current_query = model_sql_query.format(*tupla)+';\n' # inserting values into the query
+            sql_query += current_query # adding up the current query to the others up until 100 queries
+                        
+            # To commit every 100 records (in case it crashes and I avoid the delete statement to finish uploading later)
+            # It avoids to commit at the first row but it commits after the last
+            # (len-2 because one is the header, the other is the index of the last element in a zero indexing base)
+            if (n == (n // 100) * 100) and n != 0 or n == len(self.table) - 2:
+                
+                # Try to reconnect at least 10 times if the execution fails
+                for attempt in range(10):
+                    try:
+                        #executing the 100 queries
+                        self.cursor.execute(sql_query)
+                        break
+
+                    #if it reaches the 10th execution raise the error I blocked
+                    except Exception as e:
+                        if attempt == 9:
+                            print(sql_query)
+                            raise e
+                        else:
+                            continue
+
+                self.conn.commit() #either way commit everything
+                sql_query = '' #reset the query so that it a new group of queries can be committed
                 
         #commit at the end
         self.conn.commit()
 
+# upload all tables in the dictionary created (table names and tables were the input in the dict creation)
+for table_name in table_names:
+    Upload_Table(tables[table_name], table_name)
 
-Upload_Table(tables['Geography.csv'], 'Geography')
-Upload_Table(tables['Subject.csv'], 'Subject')
-Upload_Table(tables['Organization.csv'], 'Organization')
-Upload_Table(tables['Date.csv'], 'Date')
-Upload_Table(tables['User.csv'], 'User')
-Upload_Table(tables['Answers.csv'], 'Answers')
+## Total Execution Time
+
+end_time = datetime.now() # to measure total execution time
+print(f'Total Execution Time: {(end_time - start_time)}') # around 2:20 minutes
