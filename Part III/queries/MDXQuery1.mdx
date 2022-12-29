@@ -1,0 +1,15 @@
+/*
+EXECUTION: ABOUT 7 SECONDS
+Show the student that made the most mistakes for each country.
+*/
+
+with member max_by_country as 
+                    max( ([User].[Country Name].CurrentMember, 
+                          [User].[User Id].[User Id]),
+                          [Measures].[Wrong] )
+
+select max_by_country on axis(0),
+NONEMPTY( FILTER( ([User].[Country Name].[Country Name],
+                   [User].[User Id].[User Id]),
+                   [Measures].[Wrong] = max_by_country) ) on axis(1)
+from [Group 10 DB]

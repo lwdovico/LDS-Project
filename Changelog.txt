@@ -1,0 +1,4 @@
+The only changes to a previous delivery was done on the Part I, we radically sped up the upload of the table by executing 100 query at each iteration. This allowed us to get a total execution time of 2 minutes, instead of the 15 minutes we had to wait before at best.
+We also redesigned the uploading part to execute without saving and loading back the tables. 
+
+The only other thing we corrected was a typo in the last part: we casted IsCorrect to a bool without keeping into consideration the possibility of it being a string. There is no issue if the data is the preprocessed one, but if the data is first stored and then loaded again it will be loaded as a string thus returning always true when casting it (in our case "0") to a boolean. We corrected it casting it to a numeric type so that the bool could be correctly evaluated.

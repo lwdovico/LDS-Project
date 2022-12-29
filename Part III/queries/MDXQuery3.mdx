@@ -1,0 +1,23 @@
+/*
+EXECUTION: ABOUT 2 SECONDS
+For each continent, show the student with the highest ratio between his total correct
+answers and the average correct answers of that continent
+*/
+
+-- average continental correctness (sum of correct by continent / n° known answers of that continent)
+with member avg_correct as 
+(ANCESTOR([User].[Geography].CURRENTMEMBER, 3), [Measures].[Correct]) / 
+(ANCESTOR([User].[Geography].CURRENTMEMBER, 3), [Measures].[AnswerCount])
+
+member correct_ratio as 
+([User].[Geography].CURRENTMEMBER, [Measures].[Correct]) / 
+ avg_correct
+
+select {[Measures].[Correct], avg_correct, correct_ratio} on axis(0),
+NONEMPTY( GENERATE( [User].[Continents].[Continents].MEMBERS, 
+			TOPCOUNT( [User].[Continents].CURRENTMEMBER *
+				      [User].[Geography].[User Id], 
+				      1, 
+				      correct_ratio))) on axis(1)
+from [Group 10 DB]
+

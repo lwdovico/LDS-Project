@@ -1,0 +1,89 @@
+﻿<DeploymentSnapshot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0">
+  <Target>
+    <Database>Group_10_Part_III</Database>
+    <Server>http://lds.di.unipi.it/olap/msmdpump.dll</Server>
+    <ConnectionString>Data Source=http://lds.di.unipi.it/olap/msmdpump.dll;Timeout=0</ConnectionString>
+  </Target>
+  <Options>
+    <TransactionalDeployment>false</TransactionalDeployment>
+    <PartitionDeployment>DeployPartitions</PartitionDeployment>
+    <RoleDeployment>DeployRolesRetainMembers</RoleDeployment>
+    <ProcessingOption>Default</ProcessingOption>
+    <OutputScript></OutputScript>
+    <ImpactAnalysisFile></ImpactAnalysisFile>
+    <ConfigurationSettingsDeployment>Deploy</ConfigurationSettingsDeployment>
+    <OptimizationSettingsDeployment>Deploy</OptimizationSettingsDeployment>
+    <WriteBackTableCreation>UseExisting</WriteBackTableCreation>
+  </Options>
+  <Snapshot>
+    <ObjectSnapshots>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.RelationalDataSource</Type>
+        <TimeStamp>y+7eyBmCn8tGeG85adD+GyP49no=20/12/2022 21:39:1720/12/2022 21:39:17</TimeStamp>
+        <ID>
+          <String>Group 10 DB</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.DataSourceView</Type>
+        <TimeStamp>klOchSb7Hbg0p0lGv1w1M2ek6lY=21/12/2022 01:46:5720/12/2022 21:40:29</TimeStamp>
+        <ID>
+          <String>Group 10 DB</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>3LiXr9TL+TUZsBeloT0ypOI7vr4=21/12/2022 18:58:1120/12/2022 22:05:39</TimeStamp>
+        <ID>
+          <String>User</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>4U3tuUuKAmSZK8cSR7+3v4uRzqg=21/12/2022 01:51:2820/12/2022 22:36:11</TimeStamp>
+        <ID>
+          <String>Date</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>xEARKF6ZsxnXd4ket5rbDSZ7jGM=20/12/2022 22:37:3420/12/2022 22:37:34</TimeStamp>
+        <ID>
+          <String>Organization</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>ewj29Veg7aegkLdr14D0kjQEQ/8=20/12/2022 22:42:0320/12/2022 22:37:59</TimeStamp>
+        <ID>
+          <String>Subject</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>/8vPmvsldwAqJhMfPpA9OObTpZs=20/12/2022 22:42:0320/12/2022 22:42:03</TimeStamp>
+        <ID>
+          <String>Answers</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Cube</Type>
+        <TimeStamp>70yXXAelGmt70DQVABszvg0jsTQ=29/12/2022 00:14:1520/12/2022 22:42:03AF7MApYGQFIIsBbofoTz1qVtHeU=28/12/2022 23:35:5520/12/2022 22:42:03</TimeStamp>
+        <ID>
+          <String>Group 10 DB</String>
+        </ID>
+      </ObjectSnapshot>
+    </ObjectSnapshots>
+    <DatabaseSnapshot>
+      <Type>Microsoft.AnalysisServices.Database</Type>
+      <TimeStamp>COd3573QfW2k8JTz4Lsy8XC8pVM=20/12/2022 21:34:0220/12/2022 21:34:01</TimeStamp>
+      <ID>
+        <String>Group_10_Part_III</String>
+      </ID>
+    </DatabaseSnapshot>
+    <Granularity>Coarse</Granularity>
+  </Snapshot>
+  <AssemblyLocations />
+  <ProcessingComplete>true</ProcessingComplete>
+  <LastDeployed>2022-12-28T23:14:28.856667Z</LastDeployed>
+</DeploymentSnapshot>

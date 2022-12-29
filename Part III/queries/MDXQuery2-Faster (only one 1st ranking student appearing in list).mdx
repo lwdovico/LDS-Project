@@ -1,0 +1,15 @@
+/*
+EXECUTION: ABOUT 10 SECONDS
+For each subject, show the student with the highest total correct answers.
+*/
+
+with set subject_user as 
+    NONEMPTY( GENERATE( [Subject].[Subject Id].[Subject Id].MEMBERS, 
+                    TOPCOUNT( [Subject].[Subject Id].CURRENTMEMBER * 
+                              [User].[User Id].[User Id].MEMBERS, 
+                              1, 
+                              [Measures].[Correct]) ))
+                          
+select [Measures].[Correct] on axis(0),
+order(subject_user, [Measures].[Correct], BDESC) on axis(1)
+from [Group 10 DB]

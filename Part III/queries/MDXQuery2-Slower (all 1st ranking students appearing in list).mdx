@@ -1,0 +1,25 @@
+/*
+EXECUTION: 5:35 MINUTES
+For each subject, show the student with the highest total correct answers.
+*/
+
+
+with member max_by_subject as 
+                    max( ([Subject].[Subject Id].CurrentMember, 
+                          [User].[User Id].[User Id]),
+                          [Measures].[Correct] )
+set subject_user as 
+    NONEMPTY( GENERATE( [Subject].[Subject Id].[Subject Id].MEMBERS, 
+                    TOPCOUNT( [Subject].[Subject Id].CURRENTMEMBER * 
+                              [User].[User Id].[User Id].MEMBERS, 
+							  /* not only 1 hereunder but the correct count of subjcets
+							     that that have the precomputed maximum for each subject */
+                              FILTER([Subject].[Subject Id].CURRENTMEMBER * 
+							         [User].[User Id].[User Id], 
+									 [Measures].[Correct] = max_by_subject).COUNT, 
+                              
+							  [Measures].[Correct]) ))
+                          
+select [Measures].[Correct] on axis(0),
+order(subject_user, [Measures].[Correct], BDESC) on axis(1)
+from [Group 10 DB]

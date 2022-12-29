@@ -1,0 +1,2312 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/21/2022 3:48:16 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LAPTOP-R3R33IV9"
+  DTS:CreatorName="LAPTOP-R3R33IV9\Ludovico"
+  DTS:DTSID="{2D981BED-49C4-4F58-AB3C-9A19C2B319CF}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.845.0"
+  DTS:LocaleID="1040"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="34"
+  DTS:VersionGUID="{FE820ED4-7E37-4469-92B3-611EF61ABB15}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[EHS]"
+      DTS:CreationName="FLATFILE"
+      DTS:Description="Easy and Hard Subjects"
+      DTS:DTSID="{919DFD7A-4902-471C-9669-21C48A3A9CB7}"
+      DTS:ObjectName="EHS">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="Assignment_1_res.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:DataType="21"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SubjectId"
+              DTS:DTSID="{7D1E1FCD-B1F3-4E55-B9EE-1EBA2B6C5450}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="286"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Description"
+              DTS:DTSID="{44F84841-6C8B-4E80-8E0C-4BF6956F892A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:DataType="131"
+              DTS:DataPrecision="4"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Easiness Ratio"
+              DTS:DTSID="{BC51BF9E-3508-41B3-B932-E834DB84B4EC}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Difficulty"
+              DTS:DTSID="{8363B86D-5471-4D81-9E99-CB59F761167C}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Attività Flusso di dati"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Attività Flusso di dati"
+      DTS:DTSID="{667DD6E1-1120-457F-974A-D684DF741AD1}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Attività Flusso di dati"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Attività Flusso di dati\Filtering out Subjects with less than 10 Answers"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Suddivisione condizionale;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tutti i diritti sono riservati; http://www.microsoft.com/sql/support;0"
+              description="Indirizza righe di dati a output diversi a seconda del contenuto dei dati. Usare le condizioni (espressioni SSIS) per specificare le righe da indirizzare. Ad esempio, separare i record da eliminare da quelli pronti per essere caricati oppure indirizzare unicamente un subset di record."
+              name="Filtering out Subjects with less than 10 Answers"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Attività Flusso di dati\Filtering out Subjects with less than 10 Answers.Inputs[Input suddivisione condizionale]"
+                  description="Input della trasformazione Suddivisione condizionale"
+                  name="Input suddivisione condizionale">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Attività Flusso di dati\Filtering out Subjects with less than 10 Answers.Inputs[Input suddivisione condizionale].Columns[nAnswers]"
+                      cachedDataType="ui8"
+                      cachedName="nAnswers"
+                      lineageId="Package\Attività Flusso di dati\Get n° of Total Answers.Outputs[Output aggregazione 1].Columns[nAnswers]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Attività Flusso di dati\Filtering out Subjects with less than 10 Answers.Outputs[MoreThan10Answers]"
+                  description="Output 1 della trasformazione Suddivisione condizionale"
+                  errorOrTruncationOperation="Calcolo"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="MoreThan10Answers"
+                  synchronousInputId="Package\Attività Flusso di dati\Filtering out Subjects with less than 10 Answers.Inputs[Input suddivisione condizionale]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifica l'espressione. Questa versione dell'espressione utilizza gli identificatori di derivazione anziché i nomi di colonna."
+                      name="Expression">#{Package\Attività Flusso di dati\Get n° of Total Answers.Outputs[Output aggregazione 1].Columns[nAnswers]} &gt; (DT_UI8)10</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifica la versione descrittiva dell'espressione. Questa versione dell'espressione utilizza i nomi di colonna."
+                      expressionType="Notify"
+                      name="FriendlyExpression">nAnswers &gt; (DT_UI8)10</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifica la posizione della condizione nell'elenco delle condizioni valutate dalla trasformazione. L'ordine di valutazione è crescente, dal valore più basso al più alto."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Attività Flusso di dati\Filtering out Subjects with less than 10 Answers.Outputs[Output predefinito suddivisione condizionale]"
+                  description="Output predefinito per la trasformazione Suddivisione condizionale"
+                  exclusionGroup="1"
+                  name="Output predefinito suddivisione condizionale"
+                  synchronousInputId="Package\Attività Flusso di dati\Filtering out Subjects with less than 10 Answers.Inputs[Input suddivisione condizionale]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Attività Flusso di dati\Filtering out Subjects with less than 10 Answers.Outputs[Output errori suddivisione condizionale]"
+                  description="Output degli errori per la trasformazione Suddivisione condizionale"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Output errori suddivisione condizionale"
+                  synchronousInputId="Package\Attività Flusso di dati\Filtering out Subjects with less than 10 Answers.Inputs[Input suddivisione condizionale]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Attività Flusso di dati\Filtering out Subjects with less than 10 Answers.Outputs[Output errori suddivisione condizionale].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Attività Flusso di dati\Filtering out Subjects with less than 10 Answers.Outputs[Output errori suddivisione condizionale].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Attività Flusso di dati\Filtering out Subjects with less than 10 Answers.Outputs[Output errori suddivisione condizionale].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Attività Flusso di dati\Filtering out Subjects with less than 10 Answers.Outputs[Output errori suddivisione condizionale].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Attività Flusso di dati\Get Answer Table"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="Origine OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tutti i diritti sono riservati; http://www.microsoft.com/sql/support;7"
+              description="Origine OLE DB"
+              name="Get Answer Table"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Numero di secondi prima del timeout di un comando. Il valore 0 indica nessun timeout."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifica il nome dell'oggetto di database utilizzato per aprire un set di righe."
+                  name="OpenRowset">[Group_10].[Answers]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifica la variabile contenente il nome dell'oggetto di database utilizzato per aprire un set di righe."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL da eseguire."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="Variabile che contiene il comando SQL da eseguire."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifica la tabella codici della colonna da utilizzare quando l'origine dati non rende disponibili informazioni sulla tabella codici."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forza l'utilizzo del valore della proprietà DefaultCodePage per la descrizione di dati di tipo carattere."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifica la modalità utilizzata per accedere al database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="Mapping tra i parametri nel comando SQL e le variabili."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Attività Flusso di dati\Get Answer Table.Connections[OleDbConnection]"
+                  connectionManagerID="{ED7C3DDD-7CF4-4F03-8DFC-EB79CE1853C7}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[131.114.72.230.Group_10_DB.Group_10]"
+                  description="Connessione di run-time OLE DB utilizzata per accedere al database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Attività Flusso di dati\Get Answer Table.Outputs[Output origine OLE DB]"
+                  name="Output origine OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Attività Flusso di dati\Get Answer Table.Outputs[Output origine OLE DB].Columns[SubjectId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversione"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Attività Flusso di dati\Get Answer Table.Outputs[Output origine OLE DB].ExternalColumns[SubjectId]"
+                      lineageId="Package\Attività Flusso di dati\Get Answer Table.Outputs[Output origine OLE DB].Columns[SubjectId]"
+                      name="SubjectId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Attività Flusso di dati\Get Answer Table.Outputs[Output origine OLE DB].Columns[IsCorrect]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversione"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Attività Flusso di dati\Get Answer Table.Outputs[Output origine OLE DB].ExternalColumns[IsCorrect]"
+                      lineageId="Package\Attività Flusso di dati\Get Answer Table.Outputs[Output origine OLE DB].Columns[IsCorrect]"
+                      name="IsCorrect"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Attività Flusso di dati\Get Answer Table.Outputs[Output origine OLE DB].ExternalColumns[SubjectId]"
+                      dataType="i4"
+                      name="SubjectId" />
+                    <externalMetadataColumn
+                      refId="Package\Attività Flusso di dati\Get Answer Table.Outputs[Output origine OLE DB].ExternalColumns[AnswerId]"
+                      dataType="i4"
+                      name="AnswerId" />
+                    <externalMetadataColumn
+                      refId="Package\Attività Flusso di dati\Get Answer Table.Outputs[Output origine OLE DB].ExternalColumns[QuestionId]"
+                      dataType="i4"
+                      name="QuestionId" />
+                    <externalMetadataColumn
+                      refId="Package\Attività Flusso di dati\Get Answer Table.Outputs[Output origine OLE DB].ExternalColumns[AnswerValue]"
+                      dataType="i4"
+                      name="AnswerValue" />
+                    <externalMetadataColumn
+                      refId="Package\Attività Flusso di dati\Get Answer Table.Outputs[Output origine OLE DB].ExternalColumns[CorrectAnswer]"
+                      dataType="i4"
+                      name="CorrectAnswer" />
+                    <externalMetadataColumn
+                      refId="Package\Attività Flusso di dati\Get Answer Table.Outputs[Output origine OLE DB].ExternalColumns[IsCorrect]"
+                      dataType="bool"
+                      name="IsCorrect" />
+                    <externalMetadataColumn
+                      refId="Package\Attività Flusso di dati\Get Answer Table.Outputs[Output origine OLE DB].ExternalColumns[Confidence]"
+                      dataType="i4"
+                      name="Confidence" />
+                    <externalMetadataColumn
+                      refId="Package\Attività Flusso di dati\Get Answer Table.Outputs[Output origine OLE DB].ExternalColumns[UserId]"
+                      dataType="i4"
+                      name="UserId" />
+                    <externalMetadataColumn
+                      refId="Package\Attività Flusso di dati\Get Answer Table.Outputs[Output origine OLE DB].ExternalColumns[OrganizationId]"
+                      dataType="i4"
+                      name="OrganizationId" />
+                    <externalMetadataColumn
+                      refId="Package\Attività Flusso di dati\Get Answer Table.Outputs[Output origine OLE DB].ExternalColumns[DateId]"
+                      dataType="i4"
+                      name="DateId" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Attività Flusso di dati\Get Answer Table.Outputs[Output errori origine OLE DB]"
+                  isErrorOut="true"
+                  name="Output errori origine OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Attività Flusso di dati\Get Answer Table.Outputs[Output errori origine OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Attività Flusso di dati\Get Answer Table.Outputs[Output errori origine OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Attività Flusso di dati\Get Answer Table.Outputs[Output errori origine OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Attività Flusso di dati\Get Answer Table.Outputs[Output errori origine OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Attività Flusso di dati\Get Answer Table.Outputs[Output errori origine OLE DB].Columns[SubjectId]"
+                      dataType="i4"
+                      lineageId="Package\Attività Flusso di dati\Get Answer Table.Outputs[Output errori origine OLE DB].Columns[SubjectId]"
+                      name="SubjectId" />
+                    <outputColumn
+                      refId="Package\Attività Flusso di dati\Get Answer Table.Outputs[Output errori origine OLE DB].Columns[IsCorrect]"
+                      dataType="bool"
+                      lineageId="Package\Attività Flusso di dati\Get Answer Table.Outputs[Output errori origine OLE DB].Columns[IsCorrect]"
+                      name="IsCorrect" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Attività Flusso di dati\Get Correct Answers"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Suddivisione condizionale;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tutti i diritti sono riservati; http://www.microsoft.com/sql/support;0"
+              description="Indirizza righe di dati a output diversi a seconda del contenuto dei dati. Usare le condizioni (espressioni SSIS) per specificare le righe da indirizzare. Ad esempio, separare i record da eliminare da quelli pronti per essere caricati oppure indirizzare unicamente un subset di record."
+              name="Get Correct Answers"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Attività Flusso di dati\Get Correct Answers.Inputs[Input suddivisione condizionale]"
+                  description="Input della trasformazione Suddivisione condizionale"
+                  name="Input suddivisione condizionale">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Attività Flusso di dati\Get Correct Answers.Inputs[Input suddivisione condizionale].Columns[IsCorrect]"
+                      cachedDataType="bool"
+                      cachedName="IsCorrect"
+                      lineageId="Package\Attività Flusso di dati\Get Answer Table.Outputs[Output origine OLE DB].Columns[IsCorrect]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Attività Flusso di dati\Get Correct Answers.Outputs[Correct Answers]"
+                  description="Output 1 della trasformazione Suddivisione condizionale"
+                  errorOrTruncationOperation="Calcolo"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Correct Answers"
+                  synchronousInputId="Package\Attività Flusso di dati\Get Correct Answers.Inputs[Input suddivisione condizionale]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifica l'espressione. Questa versione dell'espressione utilizza gli identificatori di derivazione anziché i nomi di colonna."
+                      name="Expression">#{Package\Attività Flusso di dati\Get Answer Table.Outputs[Output origine OLE DB].Columns[IsCorrect]} ==  TRUE </property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifica la versione descrittiva dell'espressione. Questa versione dell'espressione utilizza i nomi di colonna."
+                      expressionType="Notify"
+                      name="FriendlyExpression">IsCorrect ==  TRUE </property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifica la posizione della condizione nell'elenco delle condizioni valutate dalla trasformazione. L'ordine di valutazione è crescente, dal valore più basso al più alto."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Attività Flusso di dati\Get Correct Answers.Outputs[Output predefinito suddivisione condizionale]"
+                  description="Output predefinito per la trasformazione Suddivisione condizionale"
+                  exclusionGroup="1"
+                  name="Output predefinito suddivisione condizionale"
+                  synchronousInputId="Package\Attività Flusso di dati\Get Correct Answers.Inputs[Input suddivisione condizionale]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Attività Flusso di dati\Get Correct Answers.Outputs[Output errori suddivisione condizionale]"
+                  description="Output degli errori per la trasformazione Suddivisione condizionale"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Output errori suddivisione condizionale"
+                  synchronousInputId="Package\Attività Flusso di dati\Get Correct Answers.Inputs[Input suddivisione condizionale]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Attività Flusso di dati\Get Correct Answers.Outputs[Output errori suddivisione condizionale].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Attività Flusso di dati\Get Correct Answers.Outputs[Output errori suddivisione condizionale].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Attività Flusso di dati\Get Correct Answers.Outputs[Output errori suddivisione condizionale].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Attività Flusso di dati\Get Correct Answers.Outputs[Output errori suddivisione condizionale].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Attività Flusso di dati\Get Easiness Ratio"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Colonna derivata;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tutti i diritti sono riservati; http://www.microsoft.com/sql/support;0"
+              description="Crea nuovi valori di colonna applicando espressioni alle colonne di input della trasformazione. Creare nuove colonne oppure sovrascrivere quelle esistenti. Ad esempio, concatenare i valori delle colonne 'first name' e 'last name' per creare una colonna 'full name'."
+              name="Get Easiness Ratio"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Attività Flusso di dati\Get Easiness Ratio.Inputs[Input colonna derivata]"
+                  description="Input della trasformazione Colonna derivata"
+                  name="Input colonna derivata">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Attività Flusso di dati\Get Easiness Ratio.Inputs[Input colonna derivata].Columns[nCorrectAnswers]"
+                      cachedDataType="ui8"
+                      cachedName="nCorrectAnswers"
+                      lineageId="Package\Attività Flusso di dati\Joining nCorrect and nAnswers.Outputs[Output merge join].Columns[nCorrectAnswers]" />
+                    <inputColumn
+                      refId="Package\Attività Flusso di dati\Get Easiness Ratio.Inputs[Input colonna derivata].Columns[nAnswers]"
+                      cachedDataType="ui8"
+                      cachedName="nAnswers"
+                      lineageId="Package\Attività Flusso di dati\Joining nCorrect and nAnswers.Outputs[Output merge join].Columns[nAnswers]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Attività Flusso di dati\Get Easiness Ratio.Outputs[Output colonna derivata]"
+                  description="Output predefinito della trasformazione Colonna derivata"
+                  exclusionGroup="1"
+                  name="Output colonna derivata"
+                  synchronousInputId="Package\Attività Flusso di dati\Get Easiness Ratio.Inputs[Input colonna derivata]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Attività Flusso di dati\Get Easiness Ratio.Outputs[Output colonna derivata].Columns[Easiness Ratio]"
+                      dataType="decimal"
+                      errorOrTruncationOperation="Calcolo"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Attività Flusso di dati\Get Easiness Ratio.Outputs[Output colonna derivata].Columns[Easiness Ratio]"
+                      name="Easiness Ratio"
+                      scale="4"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Espressione colonna derivata"
+                          name="Expression">(DT_DECIMAL,4)(#{Package\Attività Flusso di dati\Joining nCorrect and nAnswers.Outputs[Output merge join].Columns[nCorrectAnswers]} / (DT_DECIMAL,4)#{Package\Attività Flusso di dati\Joining nCorrect and nAnswers.Outputs[Output merge join].Columns[nAnswers]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Espressione descrittiva colonna derivata"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_DECIMAL,4)(nCorrectAnswers / (DT_DECIMAL,4)nAnswers)</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Attività Flusso di dati\Get Easiness Ratio.Outputs[Output colonna derivata].Columns[EasyCol]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Calcolo"
+                      errorRowDisposition="FailComponent"
+                      length="6"
+                      lineageId="Package\Attività Flusso di dati\Get Easiness Ratio.Outputs[Output colonna derivata].Columns[EasyCol]"
+                      name="EasyCol"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Espressione colonna derivata"
+                          name="Expression">(DT_DECIMAL,4)(#{Package\Attività Flusso di dati\Joining nCorrect and nAnswers.Outputs[Output merge join].Columns[nCorrectAnswers]} / (DT_DECIMAL,4)#{Package\Attività Flusso di dati\Joining nCorrect and nAnswers.Outputs[Output merge join].Columns[nAnswers]}) &gt; 0.9 ? "Easy" : "Normal"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Espressione descrittiva colonna derivata"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_DECIMAL,4)(nCorrectAnswers / (DT_DECIMAL,4)nAnswers) &gt; 0.9 ? "Easy" : "Normal"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Attività Flusso di dati\Get Easiness Ratio.Outputs[Output colonna derivata].Columns[HardCol]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Calcolo"
+                      errorRowDisposition="FailComponent"
+                      length="6"
+                      lineageId="Package\Attività Flusso di dati\Get Easiness Ratio.Outputs[Output colonna derivata].Columns[HardCol]"
+                      name="HardCol"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Espressione colonna derivata"
+                          name="Expression">(DT_DECIMAL,4)(#{Package\Attività Flusso di dati\Joining nCorrect and nAnswers.Outputs[Output merge join].Columns[nCorrectAnswers]} / (DT_DECIMAL,4)#{Package\Attività Flusso di dati\Joining nCorrect and nAnswers.Outputs[Output merge join].Columns[nAnswers]}) &lt; 0.2 ? "Hard" : "Normal"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Espressione descrittiva colonna derivata"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_DECIMAL,4)(nCorrectAnswers / (DT_DECIMAL,4)nAnswers) &lt; 0.2 ? "Hard" : "Normal"</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Attività Flusso di dati\Get Easiness Ratio.Outputs[Output errori colonna derivata]"
+                  description="Output degli errori della trasformazione Colonna derivata"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Output errori colonna derivata"
+                  synchronousInputId="Package\Attività Flusso di dati\Get Easiness Ratio.Inputs[Input colonna derivata]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Attività Flusso di dati\Get Easiness Ratio.Outputs[Output errori colonna derivata].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Attività Flusso di dati\Get Easiness Ratio.Outputs[Output errori colonna derivata].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Attività Flusso di dati\Get Easiness Ratio.Outputs[Output errori colonna derivata].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Attività Flusso di dati\Get Easiness Ratio.Outputs[Output errori colonna derivata].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Attività Flusso di dati\Get n° of Correct Answers"
+              componentClassID="Microsoft.Aggregate"
+              contactInfo="Aggregazione;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tutti i diritti sono riservati; http://www.microsoft.com/sql/support;3"
+              description="Aggrega i dati con funzioni quali Media, Somma, Conta numeri, Max e Min. Ad esempio, raggruppare i dati per calcolare la somma delle vendite per prodotto o la media giornaliera delle visite."
+              name="Get n° of Correct Answers"
+              version="3">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifica il numero approssimativo di chiavi Group By generate dall'aggregazione. Basso indica 500.000 valori di chiave, Medio indica 5 milioni di valori di chiave e Alto indica più di 25 milioni di valori di chiave. Non specificato indica che non viene utilizzato alcun valore KeyScale."
+                  name="KeyScale"
+                  typeConverter="KeyScaleType">0</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifica il numero esatto di chiavi Group By generate dall'aggregazione. Se si specifica un valore KeyScale, il valore di Keys ha la precedenza."
+                  name="Keys" />
+                <property
+                  dataType="System.Int32"
+                  description="Specifica il numero approssimativo di valori Distinct in una colonna a cui viene applicata la funzione di aggregazione Count Distinct. Basso indica 500.000 valori di chiave, Medio indica 5 milioni di valori di chiave e Alto indica 25 milioni di valori di chiave. Non specificato indica che non viene utilizzato alcun valore CountDistinctScale."
+                  name="CountDistinctScale"
+                  typeConverter="KeyScaleType">0</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifica il numero approssimativo di valori Distinct in una colonna a cui viene applicata la funzione di aggregazione Count Distinct. Se si specifica un valore CountDistinctScale, il valore in CountDistinctKeys ha la precedenza."
+                  name="CountDistinctKeys" />
+                <property
+                  dataType="System.Int32"
+                  description="Specifica la percentuale di estensione della memoria consentita durante l'aggregazione. I valori validi sono compresi tra 1 e 100."
+                  name="AutoExtendFactor">25</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Attività Flusso di dati\Get n° of Correct Answers.Inputs[Input aggregazione 1]"
+                  name="Input aggregazione 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Attività Flusso di dati\Get n° of Correct Answers.Inputs[Input aggregazione 1].Columns[SubjectId]"
+                      cachedDataType="i4"
+                      cachedName="SubjectId"
+                      lineageId="Package\Attività Flusso di dati\Get Answer Table.Outputs[Output origine OLE DB].Columns[SubjectId]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Attività Flusso di dati\Get n° of Correct Answers.Outputs[Output aggregazione 1]"
+                  name="Output aggregazione 1">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifica il numero approssimativo di chiavi Group By generate dall'aggregazione. Basso indica 500.000 valori di chiave, Medio indica 5 milioni di valori di chiave e Alto indica più di 25 milioni di valori di chiave. Non specificato indica che non viene utilizzato alcun valore KeyScale."
+                      name="KeyScale"
+                      typeConverter="KeyScaleType">0</property>
+                    <property
+                      dataType="System.Null"
+                      description="Specifica il numero esatto di chiavi Group By generate dall'aggregazione. Se si specifica un valore KeyScale, il valore di Keys ha la precedenza."
+                      name="Keys" />
+                  </properties>
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Attività Flusso di dati\Get n° of Correct Answers.Outputs[Output aggregazione 1].Columns[SubjectId]"
+                      dataType="i4"
+                      lineageId="Package\Attività Flusso di dati\Get n° of Correct Answers.Outputs[Output aggregazione 1].Columns[SubjectId]"
+                      name="SubjectId">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifica l'ID della colonna di input utilizzata nell'aggregazione."
+                          name="AggregationColumnId">#{Package\Attività Flusso di dati\Get Answer Table.Outputs[Output origine OLE DB].Columns[SubjectId]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifica il tipo di aggregazione."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indica se la colonna richieste interventi di gestione speciali perché contiene dati di dimensioni eccessive o richiede una precisione maggiore rispetto al tipo di dati float."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifica le opzioni per il confronto di stringhe."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Attività Flusso di dati\Get n° of Correct Answers.Outputs[Output aggregazione 1].Columns[nCorrectAnswers]"
+                      dataType="ui8"
+                      lineageId="Package\Attività Flusso di dati\Get n° of Correct Answers.Outputs[Output aggregazione 1].Columns[nCorrectAnswers]"
+                      name="nCorrectAnswers">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifica l'ID della colonna di input utilizzata nell'aggregazione."
+                          name="AggregationColumnId">#{Package\Attività Flusso di dati\0:invalid}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifica il tipo di aggregazione."
+                          name="AggregationType"
+                          typeConverter="AggregationType">2</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indica se la colonna richieste interventi di gestione speciali perché contiene dati di dimensioni eccessive o richiede una precisione maggiore rispetto al tipo di dati float."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifica le opzioni per il confronto di stringhe."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Attività Flusso di dati\Get n° of Total Answers"
+              componentClassID="Microsoft.Aggregate"
+              contactInfo="Aggregazione;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tutti i diritti sono riservati; http://www.microsoft.com/sql/support;3"
+              description="Aggrega i dati con funzioni quali Media, Somma, Conta numeri, Max e Min. Ad esempio, raggruppare i dati per calcolare la somma delle vendite per prodotto o la media giornaliera delle visite."
+              name="Get n° of Total Answers"
+              version="3">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifica il numero approssimativo di chiavi Group By generate dall'aggregazione. Basso indica 500.000 valori di chiave, Medio indica 5 milioni di valori di chiave e Alto indica più di 25 milioni di valori di chiave. Non specificato indica che non viene utilizzato alcun valore KeyScale."
+                  name="KeyScale"
+                  typeConverter="KeyScaleType">0</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifica il numero esatto di chiavi Group By generate dall'aggregazione. Se si specifica un valore KeyScale, il valore di Keys ha la precedenza."
+                  name="Keys" />
+                <property
+                  dataType="System.Int32"
+                  description="Specifica il numero approssimativo di valori Distinct in una colonna a cui viene applicata la funzione di aggregazione Count Distinct. Basso indica 500.000 valori di chiave, Medio indica 5 milioni di valori di chiave e Alto indica 25 milioni di valori di chiave. Non specificato indica che non viene utilizzato alcun valore CountDistinctScale."
+                  name="CountDistinctScale"
+                  typeConverter="KeyScaleType">0</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifica il numero approssimativo di valori Distinct in una colonna a cui viene applicata la funzione di aggregazione Count Distinct. Se si specifica un valore CountDistinctScale, il valore in CountDistinctKeys ha la precedenza."
+                  name="CountDistinctKeys" />
+                <property
+                  dataType="System.Int32"
+                  description="Specifica la percentuale di estensione della memoria consentita durante l'aggregazione. I valori validi sono compresi tra 1 e 100."
+                  name="AutoExtendFactor">25</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Attività Flusso di dati\Get n° of Total Answers.Inputs[Input aggregazione 1]"
+                  name="Input aggregazione 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Attività Flusso di dati\Get n° of Total Answers.Inputs[Input aggregazione 1].Columns[SubjectId]"
+                      cachedDataType="i4"
+                      cachedName="SubjectId"
+                      lineageId="Package\Attività Flusso di dati\Get Answer Table.Outputs[Output origine OLE DB].Columns[SubjectId]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Attività Flusso di dati\Get n° of Total Answers.Outputs[Output aggregazione 1]"
+                  name="Output aggregazione 1">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifica il numero approssimativo di chiavi Group By generate dall'aggregazione. Basso indica 500.000 valori di chiave, Medio indica 5 milioni di valori di chiave e Alto indica più di 25 milioni di valori di chiave. Non specificato indica che non viene utilizzato alcun valore KeyScale."
+                      name="KeyScale"
+                      typeConverter="KeyScaleType">0</property>
+                    <property
+                      dataType="System.Null"
+                      description="Specifica il numero esatto di chiavi Group By generate dall'aggregazione. Se si specifica un valore KeyScale, il valore di Keys ha la precedenza."
+                      name="Keys" />
+                  </properties>
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Attività Flusso di dati\Get n° of Total Answers.Outputs[Output aggregazione 1].Columns[SubjectId]"
+                      dataType="i4"
+                      lineageId="Package\Attività Flusso di dati\Get n° of Total Answers.Outputs[Output aggregazione 1].Columns[SubjectId]"
+                      name="SubjectId">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifica l'ID della colonna di input utilizzata nell'aggregazione."
+                          name="AggregationColumnId">#{Package\Attività Flusso di dati\Get Answer Table.Outputs[Output origine OLE DB].Columns[SubjectId]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifica il tipo di aggregazione."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indica se la colonna richieste interventi di gestione speciali perché contiene dati di dimensioni eccessive o richiede una precisione maggiore rispetto al tipo di dati float."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifica le opzioni per il confronto di stringhe."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Attività Flusso di dati\Get n° of Total Answers.Outputs[Output aggregazione 1].Columns[nAnswers]"
+                      dataType="ui8"
+                      lineageId="Package\Attività Flusso di dati\Get n° of Total Answers.Outputs[Output aggregazione 1].Columns[nAnswers]"
+                      name="nAnswers">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifica l'ID della colonna di input utilizzata nell'aggregazione."
+                          name="AggregationColumnId">#{Package\Attività Flusso di dati\0:invalid}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifica il tipo di aggregazione."
+                          name="AggregationType"
+                          typeConverter="AggregationType">2</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indica se la colonna richieste interventi di gestione speciali perché contiene dati di dimensioni eccessive o richiede una precisione maggiore rispetto al tipo di dati float."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifica le opzioni per il confronto di stringhe."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Attività Flusso di dati\Getting Subject Description"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Ricerca;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tutti i diritti sono riservati; http://www.microsoft.com/sql/support;6"
+              description="Crea un join delle colonne aggiuntive al flusso di dati cercando valori in una tabella. Ad esempio, creare un join della colonna 'employee id' alla tabella dei dipendenti per ottenere data di assunzione e nome del dipendente. Questa trasformazione è consigliata quando la memoria disponibile è sufficiente per la tabella di ricerca."
+              name="Getting Subject Description"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifica l'istruzione SQL che genera la tabella di ricerca."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [Group_10].[Subject]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifica un'istruzione SQL che utilizza parametri per generare la tabella di ricerca."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [Group_10].[Subject]) [refTable]
+where [refTable].[SubjectId] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifica il tipo di connessione utilizzata per accedere al set di dati di riferimento."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifica il tipo di cache della tabella di ricerca."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifica il modo in cui la trasformazione Ricerca gestisce le righe senza voci corrispondenti nel set di dati di riferimento."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifica la percentuale della cache allocata per le righe senza voci corrispondenti nel set di dati di riferimento."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Utilizzo massimo della memoria per la cache dei riferimenti in una piattaforma a 32 bit."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Utilizzo massimo della memoria per la cache dei riferimenti in una piattaforma a 64 bit."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indica se fare riferimento ai metadati in un formato XML."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="SubjectId" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Description" dataType="DT_WSTR" length="286" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifica l'elenco di identificatori di derivazione corrispondenti ai parametri utilizzati dall'istruzione SQL nella proprietà SQLCommand. Le voci nell'elenco sono separate da punti e virgola."
+                  name="ParameterMap">#{Package\Attività Flusso di dati\Union of Easy and Hard subjects.Outputs[Unione input multipli Output 1].Columns[SubjectId]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifica la tabella codici della colonna da utilizzare quando l'origine dati non rende disponibili informazioni sulla tabella codici."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determina se le chiavi duplicate nei dati di riferimento devono essere considerate come errori in caso di utilizzo della modalità di Full cache."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Attività Flusso di dati\Getting Subject Description.Connections[OleDbConnection]"
+                  connectionManagerID="{ED7C3DDD-7CF4-4F03-8DFC-EB79CE1853C7}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[131.114.72.230.Group_10_DB.Group_10]"
+                  description="Gestione connessione utilizzata per accedere ai dati di ricerca."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Attività Flusso di dati\Getting Subject Description.Inputs[Input ricerca]"
+                  name="Input ricerca">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Attività Flusso di dati\Getting Subject Description.Inputs[Input ricerca].Columns[SubjectId]"
+                      cachedDataType="i4"
+                      cachedName="SubjectId"
+                      lineageId="Package\Attività Flusso di dati\Union of Easy and Hard subjects.Outputs[Unione input multipli Output 1].Columns[SubjectId]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifica la colonna nella tabella di riferimento a cui viene unita in join una colonna."
+                          name="JoinToReferenceColumn">SubjectId</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifica la colonna nella tabella di riferimento da cui viene copiata una colonna."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Attività Flusso di dati\Getting Subject Description.Outputs[Output corrispondenza ricerca]"
+                  errorOrTruncationOperation="Ricerca"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Output corrispondenza ricerca"
+                  synchronousInputId="Package\Attività Flusso di dati\Getting Subject Description.Inputs[Input ricerca]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Attività Flusso di dati\Getting Subject Description.Outputs[Output corrispondenza ricerca].Columns[Description]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copia colonna"
+                      length="286"
+                      lineageId="Package\Attività Flusso di dati\Getting Subject Description.Outputs[Output corrispondenza ricerca].Columns[Description]"
+                      name="Description"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifica la colonna nella tabella di riferimento da cui viene copiata una colonna."
+                          name="CopyFromReferenceColumn">Description</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Attività Flusso di dati\Getting Subject Description.Outputs[Output nessuna corrispondenza ricerca]"
+                  description="Output ricerca che gestisce le righe senza voci corrispondenti nel set di dati di riferimento. Usare questo output quando la proprietà NoMatchBehavior è impostata su &quot;Invia le righe senza voci corrispondenti all'output nessuna corrispondenza&quot;."
+                  exclusionGroup="1"
+                  name="Output nessuna corrispondenza ricerca"
+                  synchronousInputId="Package\Attività Flusso di dati\Getting Subject Description.Inputs[Input ricerca]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Attività Flusso di dati\Getting Subject Description.Outputs[Output errori ricerca]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Output errori ricerca"
+                  synchronousInputId="Package\Attività Flusso di dati\Getting Subject Description.Inputs[Input ricerca]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Attività Flusso di dati\Getting Subject Description.Outputs[Output errori ricerca].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Attività Flusso di dati\Getting Subject Description.Outputs[Output errori ricerca].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Attività Flusso di dati\Getting Subject Description.Outputs[Output errori ricerca].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Attività Flusso di dati\Getting Subject Description.Outputs[Output errori ricerca].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Attività Flusso di dati\Joining nCorrect and nAnswers"
+              componentClassID="Microsoft.MergeJoin"
+              contactInfo="Merge join;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tutti i diritti sono riservati; http://www.microsoft.com/sql/support;1"
+              description="Combina due flussi di dati ordinati in uno solo tramite join di tipo FULL, LEFT o INNER. Questa trasformazione è consigliata quando i flussi di dati possono essere ordinati alle relative origini."
+              name="Joining nCorrect and nAnswers"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifica il tipo di join da eseguire."
+                  name="JoinType"
+                  typeConverter="JoinType">2</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifica il numero di colonne nella chiave di ordinamento."
+                  name="NumKeyColumns">1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se i valori Null vengono considerati come valori uguali."
+                  name="TreatNullsAsEqual">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indica il numero massimo di buffer richiesti per input prima dell'attivazione del blocco."
+                  name="MaxBuffersPerInput">5</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Attività Flusso di dati\Joining nCorrect and nAnswers.Inputs[Input merge join sinistro]"
+                  hasSideEffects="true"
+                  name="Input merge join sinistro">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Attività Flusso di dati\Joining nCorrect and nAnswers.Inputs[Input merge join sinistro].Columns[SubjectId]"
+                      cachedDataType="i4"
+                      cachedName="SubjectId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Attività Flusso di dati\Sort by SubjectId_left.Outputs[Output ordinamento].Columns[SubjectId]" />
+                    <inputColumn
+                      refId="Package\Attività Flusso di dati\Joining nCorrect and nAnswers.Inputs[Input merge join sinistro].Columns[nAnswers]"
+                      cachedDataType="ui8"
+                      cachedName="nAnswers"
+                      cachedSortKeyPosition="2"
+                      lineageId="Package\Attività Flusso di dati\Sort by SubjectId_left.Outputs[Output ordinamento].Columns[nAnswers]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Attività Flusso di dati\Joining nCorrect and nAnswers.Inputs[Input merge join destro]"
+                  hasSideEffects="true"
+                  name="Input merge join destro">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Attività Flusso di dati\Joining nCorrect and nAnswers.Inputs[Input merge join destro].Columns[SubjectId]"
+                      cachedDataType="i4"
+                      cachedName="SubjectId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Attività Flusso di dati\Sort by SubjectId_right.Outputs[Output ordinamento].Columns[SubjectId]" />
+                    <inputColumn
+                      refId="Package\Attività Flusso di dati\Joining nCorrect and nAnswers.Inputs[Input merge join destro].Columns[nCorrectAnswers]"
+                      cachedDataType="ui8"
+                      cachedName="nCorrectAnswers"
+                      cachedSortKeyPosition="2"
+                      lineageId="Package\Attività Flusso di dati\Sort by SubjectId_right.Outputs[Output ordinamento].Columns[nCorrectAnswers]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Attività Flusso di dati\Joining nCorrect and nAnswers.Outputs[Output merge join]"
+                  isSorted="true"
+                  name="Output merge join">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Attività Flusso di dati\Joining nCorrect and nAnswers.Outputs[Output merge join].Columns[SubjectId]"
+                      dataType="i4"
+                      lineageId="Package\Attività Flusso di dati\Joining nCorrect and nAnswers.Outputs[Output merge join].Columns[SubjectId]"
+                      name="SubjectId"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Colonna di input associata a questa colonna di output"
+                          name="InputColumnID">#{Package\Attività Flusso di dati\Joining nCorrect and nAnswers.Inputs[Input merge join sinistro].Columns[SubjectId]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Attività Flusso di dati\Joining nCorrect and nAnswers.Outputs[Output merge join].Columns[nCorrectAnswers]"
+                      dataType="ui8"
+                      lineageId="Package\Attività Flusso di dati\Joining nCorrect and nAnswers.Outputs[Output merge join].Columns[nCorrectAnswers]"
+                      name="nCorrectAnswers">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Colonna di input associata a questa colonna di output"
+                          name="InputColumnID">#{Package\Attività Flusso di dati\Joining nCorrect and nAnswers.Inputs[Input merge join destro].Columns[nCorrectAnswers]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Attività Flusso di dati\Joining nCorrect and nAnswers.Outputs[Output merge join].Columns[nAnswers]"
+                      dataType="ui8"
+                      lineageId="Package\Attività Flusso di dati\Joining nCorrect and nAnswers.Outputs[Output merge join].Columns[nAnswers]"
+                      name="nAnswers">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Colonna di input associata a questa colonna di output"
+                          name="InputColumnID">#{Package\Attività Flusso di dati\Joining nCorrect and nAnswers.Inputs[Input merge join sinistro].Columns[nAnswers]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Attività Flusso di dati\Multicast"
+              componentClassID="Microsoft.Multicast"
+              contactInfo="Multicast;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tutti i diritti sono riservati; http://www.microsoft.com/sql/support;0"
+              description="Distribuisce ogni riga di input a ogni riga di uno o più output. Ad esempio, creare un nuovo ramo del flusso di dati per creare una copia dei dati in modo che sia possibile mascherare alcuni valori prima di condividerli con partner esterni."
+              name="Multicast">
+              <inputs>
+                <input
+                  refId="Package\Attività Flusso di dati\Multicast.Inputs[Multicast Input 1]"
+                  name="Multicast Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Attività Flusso di dati\Multicast.Outputs[Output multicast 1]"
+                  deleteOutputOnPathDetached="true"
+                  name="Output multicast 1"
+                  synchronousInputId="Package\Attività Flusso di dati\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Attività Flusso di dati\Multicast.Outputs[Output multicast 2]"
+                  dangling="true"
+                  deleteOutputOnPathDetached="true"
+                  name="Output multicast 2"
+                  synchronousInputId="Package\Attività Flusso di dati\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Attività Flusso di dati\Multicast.Outputs[Multicast Output 1]"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 1"
+                  synchronousInputId="Package\Attività Flusso di dati\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Attività Flusso di dati\Set Easy and Hard"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Suddivisione condizionale;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tutti i diritti sono riservati; http://www.microsoft.com/sql/support;0"
+              description="Indirizza righe di dati a output diversi a seconda del contenuto dei dati. Usare le condizioni (espressioni SSIS) per specificare le righe da indirizzare. Ad esempio, separare i record da eliminare da quelli pronti per essere caricati oppure indirizzare unicamente un subset di record."
+              name="Set Easy and Hard"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Attività Flusso di dati\Set Easy and Hard.Inputs[Input suddivisione condizionale]"
+                  description="Input della trasformazione Suddivisione condizionale"
+                  name="Input suddivisione condizionale">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Attività Flusso di dati\Set Easy and Hard.Inputs[Input suddivisione condizionale].Columns[Easiness Ratio]"
+                      cachedDataType="decimal"
+                      cachedName="Easiness Ratio"
+                      cachedScale="4"
+                      lineageId="Package\Attività Flusso di dati\Get Easiness Ratio.Outputs[Output colonna derivata].Columns[Easiness Ratio]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Attività Flusso di dati\Set Easy and Hard.Outputs[Easy]"
+                  description="Output 1 della trasformazione Suddivisione condizionale"
+                  errorOrTruncationOperation="Calcolo"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Easy"
+                  synchronousInputId="Package\Attività Flusso di dati\Set Easy and Hard.Inputs[Input suddivisione condizionale]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifica l'espressione. Questa versione dell'espressione utilizza gli identificatori di derivazione anziché i nomi di colonna."
+                      name="Expression">#{Package\Attività Flusso di dati\Get Easiness Ratio.Outputs[Output colonna derivata].Columns[Easiness Ratio]} &gt; 0.9</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifica la versione descrittiva dell'espressione. Questa versione dell'espressione utilizza i nomi di colonna."
+                      expressionType="Notify"
+                      name="FriendlyExpression">[Easiness Ratio] &gt; 0.9</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifica la posizione della condizione nell'elenco delle condizioni valutate dalla trasformazione. L'ordine di valutazione è crescente, dal valore più basso al più alto."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Attività Flusso di dati\Set Easy and Hard.Outputs[Hard]"
+                  description="Output 2 della trasformazione Suddivisione condizionale"
+                  errorOrTruncationOperation="Calcolo"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Hard"
+                  synchronousInputId="Package\Attività Flusso di dati\Set Easy and Hard.Inputs[Input suddivisione condizionale]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifica l'espressione. Questa versione dell'espressione utilizza gli identificatori di derivazione anziché i nomi di colonna."
+                      name="Expression">#{Package\Attività Flusso di dati\Get Easiness Ratio.Outputs[Output colonna derivata].Columns[Easiness Ratio]} &lt; 0.2</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifica la versione descrittiva dell'espressione. Questa versione dell'espressione utilizza i nomi di colonna."
+                      expressionType="Notify"
+                      name="FriendlyExpression">[Easiness Ratio] &lt; 0.2</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifica la posizione della condizione nell'elenco delle condizioni valutate dalla trasformazione. L'ordine di valutazione è crescente, dal valore più basso al più alto."
+                      name="EvaluationOrder">1</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Attività Flusso di dati\Set Easy and Hard.Outputs[Output predefinito suddivisione condizionale]"
+                  description="Output predefinito per la trasformazione Suddivisione condizionale"
+                  exclusionGroup="1"
+                  name="Output predefinito suddivisione condizionale"
+                  synchronousInputId="Package\Attività Flusso di dati\Set Easy and Hard.Inputs[Input suddivisione condizionale]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Attività Flusso di dati\Set Easy and Hard.Outputs[Output errori suddivisione condizionale]"
+                  description="Output degli errori per la trasformazione Suddivisione condizionale"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Output errori suddivisione condizionale"
+                  synchronousInputId="Package\Attività Flusso di dati\Set Easy and Hard.Inputs[Input suddivisione condizionale]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Attività Flusso di dati\Set Easy and Hard.Outputs[Output errori suddivisione condizionale].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Attività Flusso di dati\Set Easy and Hard.Outputs[Output errori suddivisione condizionale].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Attività Flusso di dati\Set Easy and Hard.Outputs[Output errori suddivisione condizionale].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Attività Flusso di dati\Set Easy and Hard.Outputs[Output errori suddivisione condizionale].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Attività Flusso di dati\Sort by SubjectId_left"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Ordinamento;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tutti i diritti sono riservati; http://www.microsoft.com/sql/support;1"
+              description="Ordina i dati di input in ordine crescente o decrescente quando non possono essere ordinati come la relativa origine. Ad esempio, ordinare i dati delle vendite per 'customer id' prima che vengano scritti in un file flat e recapitati a un altro reparto. Nota: questa trasformazione non è consigliata per i flussi di dati di grandi dimensioni."
+              name="Sort by SubjectId_left"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se la trasformazione Ordinamento rimuove le righe con valori di ordinamento duplicati."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifica il numero massimo di thread da utilizzare per l'ordinamento."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Attività Flusso di dati\Sort by SubjectId_left.Inputs[Input ordinamento]"
+                  name="Input ordinamento">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Attività Flusso di dati\Sort by SubjectId_left.Inputs[Input ordinamento].Columns[SubjectId]"
+                      cachedDataType="i4"
+                      cachedName="SubjectId"
+                      lineageId="Package\Attività Flusso di dati\Get n° of Total Answers.Outputs[Output aggregazione 1].Columns[SubjectId]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifica le opzioni di confronto per i dati di tipo carattere."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifica il tipo di ordinamento della colonna."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Attività Flusso di dati\Sort by SubjectId_left.Inputs[Input ordinamento].Columns[nAnswers]"
+                      cachedDataType="ui8"
+                      cachedName="nAnswers"
+                      lineageId="Package\Attività Flusso di dati\Get n° of Total Answers.Outputs[Output aggregazione 1].Columns[nAnswers]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifica le opzioni di confronto per i dati di tipo carattere."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifica il tipo di ordinamento della colonna."
+                          name="NewSortKeyPosition">2</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Attività Flusso di dati\Sort by SubjectId_left.Outputs[Output ordinamento]"
+                  isSorted="true"
+                  name="Output ordinamento">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Attività Flusso di dati\Sort by SubjectId_left.Outputs[Output ordinamento].Columns[SubjectId]"
+                      dataType="i4"
+                      lineageId="Package\Attività Flusso di dati\Sort by SubjectId_left.Outputs[Output ordinamento].Columns[SubjectId]"
+                      name="SubjectId"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifica l'identificatore di derivazione della colonna di input associata a questa colonna di output."
+                          name="SortColumnId">#{Package\Attività Flusso di dati\Get n° of Total Answers.Outputs[Output aggregazione 1].Columns[SubjectId]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Attività Flusso di dati\Sort by SubjectId_left.Outputs[Output ordinamento].Columns[nAnswers]"
+                      dataType="ui8"
+                      lineageId="Package\Attività Flusso di dati\Sort by SubjectId_left.Outputs[Output ordinamento].Columns[nAnswers]"
+                      name="nAnswers"
+                      sortKeyPosition="2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifica l'identificatore di derivazione della colonna di input associata a questa colonna di output."
+                          name="SortColumnId">#{Package\Attività Flusso di dati\Get n° of Total Answers.Outputs[Output aggregazione 1].Columns[nAnswers]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Attività Flusso di dati\Sort by SubjectId_right"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Ordinamento;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tutti i diritti sono riservati; http://www.microsoft.com/sql/support;1"
+              description="Ordina i dati di input in ordine crescente o decrescente quando non possono essere ordinati come la relativa origine. Ad esempio, ordinare i dati delle vendite per 'customer id' prima che vengano scritti in un file flat e recapitati a un altro reparto. Nota: questa trasformazione non è consigliata per i flussi di dati di grandi dimensioni."
+              name="Sort by SubjectId_right"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se la trasformazione Ordinamento rimuove le righe con valori di ordinamento duplicati."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifica il numero massimo di thread da utilizzare per l'ordinamento."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Attività Flusso di dati\Sort by SubjectId_right.Inputs[Input ordinamento]"
+                  name="Input ordinamento">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Attività Flusso di dati\Sort by SubjectId_right.Inputs[Input ordinamento].Columns[SubjectId]"
+                      cachedDataType="i4"
+                      cachedName="SubjectId"
+                      lineageId="Package\Attività Flusso di dati\Get n° of Correct Answers.Outputs[Output aggregazione 1].Columns[SubjectId]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifica le opzioni di confronto per i dati di tipo carattere."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifica il tipo di ordinamento della colonna."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Attività Flusso di dati\Sort by SubjectId_right.Inputs[Input ordinamento].Columns[nCorrectAnswers]"
+                      cachedDataType="ui8"
+                      cachedName="nCorrectAnswers"
+                      lineageId="Package\Attività Flusso di dati\Get n° of Correct Answers.Outputs[Output aggregazione 1].Columns[nCorrectAnswers]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifica le opzioni di confronto per i dati di tipo carattere."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifica il tipo di ordinamento della colonna."
+                          name="NewSortKeyPosition">2</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Attività Flusso di dati\Sort by SubjectId_right.Outputs[Output ordinamento]"
+                  isSorted="true"
+                  name="Output ordinamento">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Attività Flusso di dati\Sort by SubjectId_right.Outputs[Output ordinamento].Columns[SubjectId]"
+                      dataType="i4"
+                      lineageId="Package\Attività Flusso di dati\Sort by SubjectId_right.Outputs[Output ordinamento].Columns[SubjectId]"
+                      name="SubjectId"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifica l'identificatore di derivazione della colonna di input associata a questa colonna di output."
+                          name="SortColumnId">#{Package\Attività Flusso di dati\Get n° of Correct Answers.Outputs[Output aggregazione 1].Columns[SubjectId]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Attività Flusso di dati\Sort by SubjectId_right.Outputs[Output ordinamento].Columns[nCorrectAnswers]"
+                      dataType="ui8"
+                      lineageId="Package\Attività Flusso di dati\Sort by SubjectId_right.Outputs[Output ordinamento].Columns[nCorrectAnswers]"
+                      name="nCorrectAnswers"
+                      sortKeyPosition="2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifica l'identificatore di derivazione della colonna di input associata a questa colonna di output."
+                          name="SortColumnId">#{Package\Attività Flusso di dati\Get n° of Correct Answers.Outputs[Output aggregazione 1].Columns[nCorrectAnswers]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Attività Flusso di dati\Storing Results"
+              componentClassID="Microsoft.FlatFileDestination"
+              contactInfo="Destinazione file flat;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tutti i diritti sono riservati; http://www.microsoft.com/sql/support;1"
+              description="Destinazione file flat"
+              localeId="1033"
+              name="Storing Results"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifica se i dati verranno sovrascritti o accodati nel file di destinazione."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifica il testo da scrivere nel file di destinazione prima della scrittura dei dati."
+                  expressionType="Notify"
+                  name="Header" />
+                <property
+                  dataType="System.Boolean"
+                  description="Quando il qualificatore di testo è abilitato, specifica se il qualificatore di testo nei dati scritti nel file di destinazione verrà o meno preceduto da un carattere di escape."
+                  name="EscapeQualifier">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Attività Flusso di dati\Storing Results.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[EHS]"
+                  connectionManagerRefId="Package.ConnectionManagers[EHS]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Attività Flusso di dati\Storing Results.Inputs[Input destinazione file flat]"
+                  hasSideEffects="true"
+                  name="Input destinazione file flat">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Attività Flusso di dati\Storing Results.Inputs[Input destinazione file flat].Columns[SubjectId]"
+                      cachedDataType="i4"
+                      cachedName="SubjectId"
+                      externalMetadataColumnId="Package\Attività Flusso di dati\Storing Results.Inputs[Input destinazione file flat].ExternalColumns[SubjectId]"
+                      lineageId="Package\Attività Flusso di dati\Union of Easy and Hard subjects.Outputs[Unione input multipli Output 1].Columns[SubjectId]" />
+                    <inputColumn
+                      refId="Package\Attività Flusso di dati\Storing Results.Inputs[Input destinazione file flat].Columns[Easiness Ratio]"
+                      cachedDataType="decimal"
+                      cachedName="Easiness Ratio"
+                      cachedScale="4"
+                      externalMetadataColumnId="Package\Attività Flusso di dati\Storing Results.Inputs[Input destinazione file flat].ExternalColumns[Easiness Ratio]"
+                      lineageId="Package\Attività Flusso di dati\Union of Easy and Hard subjects.Outputs[Unione input multipli Output 1].Columns[Easiness Ratio]" />
+                    <inputColumn
+                      refId="Package\Attività Flusso di dati\Storing Results.Inputs[Input destinazione file flat].Columns[Difficulty]"
+                      cachedDataType="wstr"
+                      cachedLength="6"
+                      cachedName="Difficulty"
+                      externalMetadataColumnId="Package\Attività Flusso di dati\Storing Results.Inputs[Input destinazione file flat].ExternalColumns[Difficulty]"
+                      lineageId="Package\Attività Flusso di dati\Union of Easy and Hard subjects.Outputs[Unione input multipli Output 1].Columns[Difficulty]" />
+                    <inputColumn
+                      refId="Package\Attività Flusso di dati\Storing Results.Inputs[Input destinazione file flat].Columns[Description]"
+                      cachedDataType="wstr"
+                      cachedLength="286"
+                      cachedName="Description"
+                      externalMetadataColumnId="Package\Attività Flusso di dati\Storing Results.Inputs[Input destinazione file flat].ExternalColumns[Description]"
+                      lineageId="Package\Attività Flusso di dati\Getting Subject Description.Outputs[Output corrispondenza ricerca].Columns[Description]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Attività Flusso di dati\Storing Results.Inputs[Input destinazione file flat].ExternalColumns[SubjectId]"
+                      dataType="ui8"
+                      name="SubjectId" />
+                    <externalMetadataColumn
+                      refId="Package\Attività Flusso di dati\Storing Results.Inputs[Input destinazione file flat].ExternalColumns[Easiness Ratio]"
+                      dataType="numeric"
+                      name="Easiness Ratio"
+                      precision="4" />
+                    <externalMetadataColumn
+                      refId="Package\Attività Flusso di dati\Storing Results.Inputs[Input destinazione file flat].ExternalColumns[Difficulty]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="Difficulty" />
+                    <externalMetadataColumn
+                      refId="Package\Attività Flusso di dati\Storing Results.Inputs[Input destinazione file flat].ExternalColumns[Description]"
+                      dataType="wstr"
+                      length="286"
+                      name="Description" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Attività Flusso di dati\Union of Easy and Hard subjects"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Unione input multipli;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tutti i diritti sono riservati; http://www.microsoft.com/sql/support;1"
+              description="Combina righe di più flussi di dati senza ordinarle. Ad esempio, aggiungere nuovamente le righe al flusso di dati dopo avere corretto gli errori. Se l'ordinamento è importante, è consigliabile utilizzare la trasformazione Unione."
+              name="Union of Easy and Hard subjects"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\Attività Flusso di dati\Union of Easy and Hard subjects.Inputs[Unione input multipli Input 1]"
+                  name="Unione input multipli Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Attività Flusso di dati\Union of Easy and Hard subjects.Inputs[Unione input multipli Input 1].Columns[SubjectId]"
+                      cachedDataType="i4"
+                      cachedName="SubjectId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Attività Flusso di dati\Joining nCorrect and nAnswers.Outputs[Output merge join].Columns[SubjectId]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="ID derivazione colonna output"
+                          name="OutputColumnLineageID">#{Package\Attività Flusso di dati\Union of Easy and Hard subjects.Outputs[Unione input multipli Output 1].Columns[SubjectId]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Attività Flusso di dati\Union of Easy and Hard subjects.Inputs[Unione input multipli Input 1].Columns[nCorrectAnswers]"
+                      cachedDataType="ui8"
+                      cachedName="nCorrectAnswers"
+                      lineageId="Package\Attività Flusso di dati\Joining nCorrect and nAnswers.Outputs[Output merge join].Columns[nCorrectAnswers]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="ID derivazione colonna output"
+                          name="OutputColumnLineageID">#{Package\Attività Flusso di dati\Union of Easy and Hard subjects.Outputs[Unione input multipli Output 1].Columns[nCorrectAnswers]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Attività Flusso di dati\Union of Easy and Hard subjects.Inputs[Unione input multipli Input 1].Columns[nAnswers]"
+                      cachedDataType="ui8"
+                      cachedName="nAnswers"
+                      lineageId="Package\Attività Flusso di dati\Joining nCorrect and nAnswers.Outputs[Output merge join].Columns[nAnswers]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="ID derivazione colonna output"
+                          name="OutputColumnLineageID">#{Package\Attività Flusso di dati\Union of Easy and Hard subjects.Outputs[Unione input multipli Output 1].Columns[nAnswers]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Attività Flusso di dati\Union of Easy and Hard subjects.Inputs[Unione input multipli Input 1].Columns[Easiness Ratio]"
+                      cachedDataType="decimal"
+                      cachedName="Easiness Ratio"
+                      cachedScale="4"
+                      lineageId="Package\Attività Flusso di dati\Get Easiness Ratio.Outputs[Output colonna derivata].Columns[Easiness Ratio]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="ID derivazione colonna output"
+                          name="OutputColumnLineageID">#{Package\Attività Flusso di dati\Union of Easy and Hard subjects.Outputs[Unione input multipli Output 1].Columns[Easiness Ratio]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Attività Flusso di dati\Union of Easy and Hard subjects.Inputs[Unione input multipli Input 1].Columns[EasyCol]"
+                      cachedDataType="wstr"
+                      cachedLength="6"
+                      cachedName="EasyCol"
+                      lineageId="Package\Attività Flusso di dati\Get Easiness Ratio.Outputs[Output colonna derivata].Columns[EasyCol]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="ID derivazione colonna output"
+                          name="OutputColumnLineageID">#{Package\Attività Flusso di dati\Union of Easy and Hard subjects.Outputs[Unione input multipli Output 1].Columns[Difficulty]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Attività Flusso di dati\Union of Easy and Hard subjects.Inputs[Input unione input multipli 1]"
+                  hasSideEffects="true"
+                  name="Input unione input multipli 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Attività Flusso di dati\Union of Easy and Hard subjects.Inputs[Input unione input multipli 1].Columns[SubjectId]"
+                      cachedDataType="i4"
+                      cachedName="SubjectId"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Attività Flusso di dati\Joining nCorrect and nAnswers.Outputs[Output merge join].Columns[SubjectId]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="ID derivazione colonna output"
+                          name="OutputColumnLineageID">#{Package\Attività Flusso di dati\Union of Easy and Hard subjects.Outputs[Unione input multipli Output 1].Columns[SubjectId]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Attività Flusso di dati\Union of Easy and Hard subjects.Inputs[Input unione input multipli 1].Columns[nCorrectAnswers]"
+                      cachedDataType="ui8"
+                      cachedName="nCorrectAnswers"
+                      lineageId="Package\Attività Flusso di dati\Joining nCorrect and nAnswers.Outputs[Output merge join].Columns[nCorrectAnswers]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="ID derivazione colonna output"
+                          name="OutputColumnLineageID">#{Package\Attività Flusso di dati\Union of Easy and Hard subjects.Outputs[Unione input multipli Output 1].Columns[nCorrectAnswers]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Attività Flusso di dati\Union of Easy and Hard subjects.Inputs[Input unione input multipli 1].Columns[nAnswers]"
+                      cachedDataType="ui8"
+                      cachedName="nAnswers"
+                      lineageId="Package\Attività Flusso di dati\Joining nCorrect and nAnswers.Outputs[Output merge join].Columns[nAnswers]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="ID derivazione colonna output"
+                          name="OutputColumnLineageID">#{Package\Attività Flusso di dati\Union of Easy and Hard subjects.Outputs[Unione input multipli Output 1].Columns[nAnswers]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Attività Flusso di dati\Union of Easy and Hard subjects.Inputs[Input unione input multipli 1].Columns[Easiness Ratio]"
+                      cachedDataType="decimal"
+                      cachedName="Easiness Ratio"
+                      cachedScale="4"
+                      lineageId="Package\Attività Flusso di dati\Get Easiness Ratio.Outputs[Output colonna derivata].Columns[Easiness Ratio]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="ID derivazione colonna output"
+                          name="OutputColumnLineageID">#{Package\Attività Flusso di dati\Union of Easy and Hard subjects.Outputs[Unione input multipli Output 1].Columns[Easiness Ratio]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Attività Flusso di dati\Union of Easy and Hard subjects.Inputs[Input unione input multipli 1].Columns[HardCol]"
+                      cachedDataType="wstr"
+                      cachedLength="6"
+                      cachedName="HardCol"
+                      lineageId="Package\Attività Flusso di dati\Get Easiness Ratio.Outputs[Output colonna derivata].Columns[HardCol]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="ID derivazione colonna output"
+                          name="OutputColumnLineageID">#{Package\Attività Flusso di dati\Union of Easy and Hard subjects.Outputs[Unione input multipli Output 1].Columns[Difficulty]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Attività Flusso di dati\Union of Easy and Hard subjects.Inputs[Input unione input multipli 2]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Input unione input multipli 2">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Attività Flusso di dati\Union of Easy and Hard subjects.Outputs[Unione input multipli Output 1]"
+                  name="Unione input multipli Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Attività Flusso di dati\Union of Easy and Hard subjects.Outputs[Unione input multipli Output 1].Columns[SubjectId]"
+                      dataType="i4"
+                      lineageId="Package\Attività Flusso di dati\Union of Easy and Hard subjects.Outputs[Unione input multipli Output 1].Columns[SubjectId]"
+                      name="SubjectId" />
+                    <outputColumn
+                      refId="Package\Attività Flusso di dati\Union of Easy and Hard subjects.Outputs[Unione input multipli Output 1].Columns[nCorrectAnswers]"
+                      dataType="ui8"
+                      lineageId="Package\Attività Flusso di dati\Union of Easy and Hard subjects.Outputs[Unione input multipli Output 1].Columns[nCorrectAnswers]"
+                      name="nCorrectAnswers" />
+                    <outputColumn
+                      refId="Package\Attività Flusso di dati\Union of Easy and Hard subjects.Outputs[Unione input multipli Output 1].Columns[nAnswers]"
+                      dataType="ui8"
+                      lineageId="Package\Attività Flusso di dati\Union of Easy and Hard subjects.Outputs[Unione input multipli Output 1].Columns[nAnswers]"
+                      name="nAnswers" />
+                    <outputColumn
+                      refId="Package\Attività Flusso di dati\Union of Easy and Hard subjects.Outputs[Unione input multipli Output 1].Columns[Easiness Ratio]"
+                      dataType="decimal"
+                      lineageId="Package\Attività Flusso di dati\Union of Easy and Hard subjects.Outputs[Unione input multipli Output 1].Columns[Easiness Ratio]"
+                      name="Easiness Ratio"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Attività Flusso di dati\Union of Easy and Hard subjects.Outputs[Unione input multipli Output 1].Columns[Difficulty]"
+                      dataType="wstr"
+                      length="6"
+                      lineageId="Package\Attività Flusso di dati\Union of Easy and Hard subjects.Outputs[Unione input multipli Output 1].Columns[Difficulty]"
+                      name="Difficulty" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Attività Flusso di dati.Paths[Correct Answers]"
+              endId="Package\Attività Flusso di dati\Get n° of Correct Answers.Inputs[Input aggregazione 1]"
+              name="Correct Answers"
+              startId="Package\Attività Flusso di dati\Get Correct Answers.Outputs[Correct Answers]" />
+            <path
+              refId="Package\Attività Flusso di dati.Paths[Easy]"
+              endId="Package\Attività Flusso di dati\Union of Easy and Hard subjects.Inputs[Unione input multipli Input 1]"
+              name="Easy"
+              startId="Package\Attività Flusso di dati\Set Easy and Hard.Outputs[Easy]" />
+            <path
+              refId="Package\Attività Flusso di dati.Paths[Hard]"
+              endId="Package\Attività Flusso di dati\Union of Easy and Hard subjects.Inputs[Input unione input multipli 1]"
+              name="Hard"
+              startId="Package\Attività Flusso di dati\Set Easy and Hard.Outputs[Hard]" />
+            <path
+              refId="Package\Attività Flusso di dati.Paths[MoreThan10Answers]"
+              endId="Package\Attività Flusso di dati\Sort by SubjectId_left.Inputs[Input ordinamento]"
+              name="MoreThan10Answers"
+              startId="Package\Attività Flusso di dati\Filtering out Subjects with less than 10 Answers.Outputs[MoreThan10Answers]" />
+            <path
+              refId="Package\Attività Flusso di dati.Paths[Multicast Output 1]"
+              endId="Package\Attività Flusso di dati\Get n° of Total Answers.Inputs[Input aggregazione 1]"
+              name="Multicast Output 1"
+              startId="Package\Attività Flusso di dati\Multicast.Outputs[Multicast Output 1]" />
+            <path
+              refId="Package\Attività Flusso di dati.Paths[Output aggregazione 1]"
+              endId="Package\Attività Flusso di dati\Filtering out Subjects with less than 10 Answers.Inputs[Input suddivisione condizionale]"
+              name="Output aggregazione 1"
+              startId="Package\Attività Flusso di dati\Get n° of Total Answers.Outputs[Output aggregazione 1]" />
+            <path
+              refId="Package\Attività Flusso di dati.Paths[Output aggregazione 11]"
+              endId="Package\Attività Flusso di dati\Sort by SubjectId_right.Inputs[Input ordinamento]"
+              name="Output aggregazione 1"
+              startId="Package\Attività Flusso di dati\Get n° of Correct Answers.Outputs[Output aggregazione 1]" />
+            <path
+              refId="Package\Attività Flusso di dati.Paths[Output colonna derivata]"
+              endId="Package\Attività Flusso di dati\Set Easy and Hard.Inputs[Input suddivisione condizionale]"
+              name="Output colonna derivata"
+              startId="Package\Attività Flusso di dati\Get Easiness Ratio.Outputs[Output colonna derivata]" />
+            <path
+              refId="Package\Attività Flusso di dati.Paths[Output corrispondenza ricerca]"
+              endId="Package\Attività Flusso di dati\Storing Results.Inputs[Input destinazione file flat]"
+              name="Output corrispondenza ricerca"
+              startId="Package\Attività Flusso di dati\Getting Subject Description.Outputs[Output corrispondenza ricerca]" />
+            <path
+              refId="Package\Attività Flusso di dati.Paths[Output merge join]"
+              endId="Package\Attività Flusso di dati\Get Easiness Ratio.Inputs[Input colonna derivata]"
+              name="Output merge join"
+              startId="Package\Attività Flusso di dati\Joining nCorrect and nAnswers.Outputs[Output merge join]" />
+            <path
+              refId="Package\Attività Flusso di dati.Paths[Output multicast 1]"
+              endId="Package\Attività Flusso di dati\Get Correct Answers.Inputs[Input suddivisione condizionale]"
+              name="Output multicast 1"
+              startId="Package\Attività Flusso di dati\Multicast.Outputs[Output multicast 1]" />
+            <path
+              refId="Package\Attività Flusso di dati.Paths[Output ordinamento]"
+              endId="Package\Attività Flusso di dati\Joining nCorrect and nAnswers.Inputs[Input merge join sinistro]"
+              name="Output ordinamento"
+              startId="Package\Attività Flusso di dati\Sort by SubjectId_left.Outputs[Output ordinamento]" />
+            <path
+              refId="Package\Attività Flusso di dati.Paths[Output ordinamento1]"
+              endId="Package\Attività Flusso di dati\Joining nCorrect and nAnswers.Inputs[Input merge join destro]"
+              name="Output ordinamento"
+              startId="Package\Attività Flusso di dati\Sort by SubjectId_right.Outputs[Output ordinamento]" />
+            <path
+              refId="Package\Attività Flusso di dati.Paths[Output origine OLE DB]"
+              endId="Package\Attività Flusso di dati\Multicast.Inputs[Multicast Input 1]"
+              name="Output origine OLE DB"
+              startId="Package\Attività Flusso di dati\Get Answer Table.Outputs[Output origine OLE DB]" />
+            <path
+              refId="Package\Attività Flusso di dati.Paths[Unione input multipli Output 1]"
+              endId="Package\Attività Flusso di dati\Getting Subject Description.Inputs[Input ricerca]"
+              name="Unione input multipli Output 1"
+              startId="Package\Attività Flusso di dati\Union of Easy and Hard subjects.Outputs[Unione input multipli Output 1]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="177,42"
+          Id="Package\Attività Flusso di dati"
+          TopLeft="191,125" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Attività Flusso di dati">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="202,42"
+          Id="Package\Attività Flusso di dati\Get n° of Correct Answers"
+          TopLeft="390,449" />
+        <NodeLayout
+          Size="182,42"
+          Id="Package\Attività Flusso di dati\Sort by SubjectId_left"
+          TopLeft="77,534" />
+        <NodeLayout
+          Size="224,42"
+          Id="Package\Attività Flusso di dati\Joining nCorrect and nAnswers"
+          TopLeft="243,624" />
+        <NodeLayout
+          Size="162,42"
+          Id="Package\Attività Flusso di dati\Get Answer Table"
+          TopLeft="245,206" />
+        <NodeLayout
+          Size="149,42"
+          Id="Package\Attività Flusso di dati\Storing Results"
+          TopLeft="281,700" />
+        <NodeLayout
+          Size="192,42"
+          Id="Package\Attività Flusso di dati\Get n° of Total Answers"
+          TopLeft="75,366" />
+        <NodeLayout
+          Size="166,42"
+          Id="Package\Attività Flusso di dati\Get Easiness Ratio"
+          TopLeft="543,622" />
+        <NodeLayout
+          Size="166,42"
+          Id="Package\Attività Flusso di dati\Set Easy and Hard"
+          TopLeft="808,624" />
+        <NodeLayout
+          Size="120,42"
+          Id="Package\Attività Flusso di dati\Multicast"
+          TopLeft="260,285" />
+        <NodeLayout
+          Size="188,42"
+          Id="Package\Attività Flusso di dati\Sort by SubjectId_right"
+          TopLeft="403,531" />
+        <NodeLayout
+          Size="175,42"
+          Id="Package\Attività Flusso di dati\Get Correct Answers"
+          TopLeft="398,375" />
+        <NodeLayout
+          Size="207,42"
+          Id="Package\Attività Flusso di dati\Getting Subject Description"
+          TopLeft="517,703" />
+        <NodeLayout
+          Size="304,42"
+          Id="Package\Attività Flusso di dati\Filtering out Subjects with less than 10 Answers"
+          TopLeft="18,453" />
+        <NodeLayout
+          Size="232,42"
+          Id="Package\Attività Flusso di dati\Union of Easy and Hard subjects"
+          TopLeft="779,698" />
+        <EdgeLayout
+          Id="Package\Attività Flusso di dati.Paths[Output aggregazione 11]"
+          TopLeft="494,491">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,40"
+              Start="0,0"
+              End="0,32.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Attività Flusso di dati.Paths[Output aggregazione 1]"
+          TopLeft="170.5,408">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,45"
+              Start="0,0"
+              End="0,37.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Attività Flusso di dati.Paths[Multicast Output 1]"
+          TopLeft="320,327">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-149,39"
+              Start="0,0"
+              End="-149,31.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15.5"
+                    Point2="0,19.5"
+                    Point3="-4,19.5" />
+                  <mssgle:LineSegment
+                    End="-145,19.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-145,19.5"
+                    Point2="-149,19.5"
+                    Point3="-149,23.5" />
+                  <mssgle:LineSegment
+                    End="-149,31.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Attività Flusso di dati.Paths[MoreThan10Answers]"
+          TopLeft="169,495">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39"
+              Start="0,0"
+              End="0,31.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-46.512578125,10.87548828125,93.02515625,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Attività Flusso di dati.Paths[Hard]"
+          TopLeft="937,666">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32"
+              Start="0,0"
+              End="0,24.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-10.86298828125,7.37548828125,21.7259765625,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Attività Flusso di dati.Paths[Easy]"
+          TopLeft="848,666">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32"
+              Start="0,0"
+              End="0,24.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-10.76693359375,6.60888671875,21.5338671875,11.2822265625"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Attività Flusso di dati.Paths[Correct Answers]"
+          TopLeft="488.25,417">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32"
+              Start="0,0"
+              End="0,24.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-36.62509765625,7.47314453125,73.2501953125,9.5537109375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Attività Flusso di dati.Paths[Unione input multipli Output 1]"
+          TopLeft="779,721.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-55,0"
+              Start="0,0"
+              End="-47.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-47.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Attività Flusso di dati.Paths[Output origine OLE DB]"
+          TopLeft="323,248">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37"
+              Start="0,0"
+              End="0,29.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Attività Flusso di dati.Paths[Output ordinamento1]"
+          TopLeft="497,573">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-106,51"
+              Start="0,0"
+              End="-106,43.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.3829787234043" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26.3829787234043"
+                    Point2="0,30.3829787234043"
+                    Point3="-4,30.3829787234043" />
+                  <mssgle:LineSegment
+                    End="-102,30.3829787234043" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-102,30.3829787234043"
+                    Point2="-106,30.3829787234043"
+                    Point3="-106,34.3829787234043" />
+                  <mssgle:LineSegment
+                    End="-106,43.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Attività Flusso di dati.Paths[Output ordinamento]"
+          TopLeft="168,576">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="151,48"
+              Start="0,0"
+              End="151,40.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.5957446808511" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.5957446808511"
+                    Point2="0,28.5957446808511"
+                    Point3="4,28.5957446808511" />
+                  <mssgle:LineSegment
+                    End="147,28.5957446808511" />
+                  <mssgle:CubicBezierSegment
+                    Point1="147,28.5957446808511"
+                    Point2="151,28.5957446808511"
+                    Point3="151,32.5957446808511" />
+                  <mssgle:LineSegment
+                    End="151,40.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Attività Flusso di dati.Paths[Output multicast 1]"
+          TopLeft="338.666666666667,327">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="146.833333333333,48"
+              Start="0,0"
+              End="146.833333333333,40.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.5789473684211" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15.5789473684211"
+                    Point2="0,19.5789473684211"
+                    Point3="4,19.5789473684211" />
+                  <mssgle:LineSegment
+                    End="142.833333333333,19.5789473684211" />
+                  <mssgle:CubicBezierSegment
+                    Point1="142.833333333333,19.5789473684211"
+                    Point2="146.833333333333,19.5789473684211"
+                    Point3="146.833333333333,23.5789473684211" />
+                  <mssgle:LineSegment
+                    End="146.833333333333,40.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Attività Flusso di dati.Paths[Output merge join]"
+          TopLeft="467,644">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="76,0"
+              Start="0,0"
+              End="68.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="68.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Attività Flusso di dati.Paths[Output corrispondenza ricerca]"
+          TopLeft="517,722.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-87,0"
+              Start="0,0"
+              End="-79.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-79.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-47.75,5,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Attività Flusso di dati.Paths[Output colonna derivata]"
+          TopLeft="709,644">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="99,0"
+              Start="0,0"
+              End="91.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="91.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelinePath
+    design-time-name="Package\Attività Flusso di dati.Paths[Output corrispondenza ricerca]">
+    <PathAnnotation>Never</PathAnnotation>
+  </PipelinePath>
+  <PipelineComponentMetadata
+    design-time-name="Package\Attività Flusso di dati\Get Answer Table">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Attività Flusso di dati\Getting Subject Description">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[Group_10].[Subject]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

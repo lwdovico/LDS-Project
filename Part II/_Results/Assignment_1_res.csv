@@ -1,0 +1,10 @@
+SubjectId;Description;Easiness Ratio;Difficulty
+55;"Maths(3) - Algebra(49) - Sequences(61) - Linear Sequences (nth term)(171) - Other Sequences(173)";0.9074;Easy
+152;"Maths(3) - Geometry and Measure(71) - 2D Names and Properties of Shapes(174) - Properties of Polygons(84) - Properties of Quadrilaterals(88)";0.9236;Easy
+273;"Maths(3) - Number(32) - Basic Arithmetic(144) - Counting(200)";0.9333;Easy
+348;"Maths(3) - Number(32) - Geometry and Measure(71) - Proportion(45) - Units of Measurement(98) - Length Units(195) - Direct Proportion(243)";0.9161;Easy
+357;"Maths(3) - Number(32) - Geometry and Measure(71) - Units of Measurement(98) - Basic Arithmetic(144) - Temperature units(199) - Place Value(202)";0.9268;Easy
+35;"Maths(3) - Algebra(49) - Geometry and Measure(71) - Straight Line Graphs(54) - Transformations(278) - Reflection(92) - Plotting Lines from Tables of Values(257)";0.1818;Hard
+244;"Maths(3) - Geometry and Measure(71) - Units of Measurement(98) - Volume and Surface Area(100) - Volume of Prisms(189) - Length Units(195)";0.1718;Hard
+297;"Maths(3) - Number(32) - Decimals(36) - Fractions, Decimals and Percentage Equivalence(38) - Percentages(44) - Multiplying and Dividing with Decimals(224) - Percentage Increase and Decrease(234) - Converting between Decimals and Percentages(239)";0.1764;Hard
+316;"Maths(3) - Number(32) - Fractions(39) - Adding and Subtracting Fractions(230) - Multiplying Fractions(231)";0.1666;Hard
