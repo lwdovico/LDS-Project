@@ -7,7 +7,7 @@ This part covers the ETL and integration of the data sources into a datawarehous
 Here's the schema we built from the information that was available.
 
 
-<img src="https://raw.githubusercontent.com/lwdovico/LDS-Project/main/Part%20I/schema.png" alt="Schema" width="600">
+<img src="https://raw.githubusercontent.com/lwdovico/LDS-Project/main/Part%20I/schema.png" alt="Schema" width="1000">
 
 The python script to run is "LDS Project (Part I).py", we also kept the jupyter notebook "... - Data Integration Notebook.ipynb" we used to write and test the functions. Some outputs are visible and the order of cells and functions is divided by topic and it follows the one of develepoment, thus it is slightly easier to read than the *.py file.
 
